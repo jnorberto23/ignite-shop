@@ -9,6 +9,8 @@ import { HomeContainer, Product } from "../styles/pages/home"
 
 import 'keen-slider/keen-slider.min.css'
 import Stripe from "stripe"
+import { Fragment } from "react"
+import Head from "next/head"
 
 interface HomeProps {
   products: {
@@ -28,6 +30,11 @@ export default function Home({ products }: HomeProps) {
   });
 
   return (
+    <Fragment>
+
+    <Head>
+      <title>Home | Ignite Shop</title>
+    </Head>
     <HomeContainer ref={sliderRef} className="keen-slider">
       {products.map(product => {
         return (
@@ -46,6 +53,8 @@ export default function Home({ products }: HomeProps) {
         )
       })}
     </HomeContainer>
+
+    </Fragment>
   )
 }
 
