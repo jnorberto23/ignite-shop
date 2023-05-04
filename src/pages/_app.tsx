@@ -5,11 +5,8 @@ import {
   Container,
 
 } from "../styles/pages/app";
-
-
 import { CartContextProvider } from "../context/CartContext";
-
-import { HeaderComponent } from "./component/Header";
+import { HeaderComponent } from "../components/Header";
 
 globalStyles();
 
