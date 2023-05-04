@@ -54,7 +54,7 @@ export default function Product({ product }: ProductProps) {
 
   async function handleAddToCart() {
     const item: ItemType = {
-      id: product.name,
+      id: product.defaultPriceId,
       amount: 1,
       price: product.price,
     };
@@ -91,7 +91,7 @@ export default function Product({ product }: ProductProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [{ params: { id: "prod_NnSqdJoBvQozZ9" } }],
+    paths: [],
     fallback: "blocking",
   };
 };
@@ -106,8 +106,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
   });
 
   const price = product.default_price as Stripe.Price;
-    console.log('product', product)
-
+ 
   return {
     props: {
       product: {
@@ -117,7 +116,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
         price: new Intl.NumberFormat("pt-BR", {
           style: "currency",
           currency: "BRL",
-        }).format(price.unit_amount || 0 / 100),
+        }).format((price.unit_amount || 0) / 100),
         description: product.description,
         defaultPriceId: price.id,
       },

@@ -9,9 +9,9 @@ import { HomeContainer, Product } from "../styles/pages/home";
 
 import "keen-slider/keen-slider.min.css";
 import Stripe from "stripe";
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment } from "react";
 import Head from "next/head";
-import { CartContext } from "../context/CartContext";
+
 
 interface HomeProps {
   products: {
@@ -30,12 +30,6 @@ export default function Home({ products }: HomeProps) {
     },
   });
 
-  const {cart} = useContext(CartContext)
-  console.log('cart', cart)
-
-  useEffect(() => {
-    console.log('cart', cart)
-  }, [cart])
   return (
     <Fragment>
       <Head>
@@ -76,7 +70,7 @@ export const getStaticProps: GetStaticProps = async () => {
       price: new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL",
-      }).format(price.unit_amount! / 100),
+      }).format((price.unit_amount || 0) / 100),
     };
   });
 
