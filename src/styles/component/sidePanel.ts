@@ -5,14 +5,14 @@ export const SidePanelWrapper = styled("div", {
     isSideCartPanelOpen: {
       true: {
         visibility: "visible",
-        transition: "1s",
       },
       false: {
         visibility: "collapse",
-        transition: "1s",
       },
     },
   },
+  display: 'flex',
+  flexDirection: 'column',
   height: "100%",
   width: "90%",
   position: "fixed",
@@ -22,10 +22,25 @@ export const SidePanelWrapper = styled("div", {
   backgroundColor: "$gray800",
 
   overflowX: "auto",
-  paddingTop: "60px",
+  paddingTop: "10px",
 
   "@media screen and (max-width: 720px) ": {
     left: "10%",
     width: "100%",
   },
 });
+
+export const CloseButton = styled("button", {
+    float: 'right',
+    padding: 'auto',
+    border: "none",
+    background: "none",
+    cursor: "pointer",
+    color: "$white",
+    width: '4rem',
+    height: '4rem',
+    svg: {
+      color: "$white",
+      fontSize: "$xl",
+    },
+  });

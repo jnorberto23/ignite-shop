@@ -1,20 +1,24 @@
 import { CartContext } from "@/src/context/CartContext";
-import { SidePanelWrapper } from "@/src/styles/component/sidePanel";
+import {
+  CloseButton,
+  SidePanelWrapper,
+} from "@/src/styles/component/sidePanel";
+import { X } from "phosphor-react";
 import { useContext } from "react";
 
 export function CartPanel() {
   const { isSideCartPanelOpen } = useContext(CartContext);
   const { changeSideCartPanelOpen } = useContext(CartContext);
 
-  function handleSideCartPanelChange(){
-    changeSideCartPanelOpen(false)
+  function handleSideCartPanelChange() {
+    changeSideCartPanelOpen(false);
   }
   return (
     <SidePanelWrapper isSideCartPanelOpen={isSideCartPanelOpen}>
-      <div>
-        <span>Carrinho</span>
-        <button onClick={handleSideCartPanelChange}>X</button>
-      </div>
+      <CloseButton onClick={handleSideCartPanelChange}>
+        <X />
+      </CloseButton>
+      <span>Carrinho</span>
     </SidePanelWrapper>
   );
 }
