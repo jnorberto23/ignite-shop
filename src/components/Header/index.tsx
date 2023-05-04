@@ -16,17 +16,21 @@ export function HeaderComponent() {
   const [isBadgeVisible, setIsBadgeVisible] = useState(
     cartCount > 0 ? true : false
   );
+  const { changeSideCartPanelOpen } = useContext(CartContext);
 
   useEffect(() => {
     setIsBadgeVisible(cartCount > 0 ? true : false);
   }, [cartCount]);
 
+  function handleSideCartPanelChange(){
+    changeSideCartPanelOpen(true)
+  }
   return (
     <Header>
       <Link href={"/"}>
         <Image src={logoImg} alt="Ignite Shop Logo" />
       </Link>
-      <CartIconButton>
+      <CartIconButton onClick={handleSideCartPanelChange}>
         <Handbag />
       </CartIconButton>
       <CartCounterBadge isBadgeVisible={isBadgeVisible}>

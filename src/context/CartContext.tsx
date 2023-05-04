@@ -15,7 +15,9 @@ interface ContextInterface {
   cart: ItemType[];
   totalPrice: number;
   cartCount: number;
+  isSideCartPanelOpen: boolean;
   addToCart: (item: ItemType) => void;
+  changeSideCartPanelOpen: (value: boolean) => void
 
 }
 
@@ -25,10 +27,16 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cart, setCart] = useState<ItemType[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartCount, setCartCount] = useState(0);
+  const [isSideCartPanelOpen, setIsSideCartPanelOpen] = useState(false);
 
   function addToCart(item: ItemType) {
     setCart([...cart, item]);
   }
+
+  function changeSideCartPanelOpen(value: boolean) {
+    setIsSideCartPanelOpen(value);
+  }
+
 
   useEffect(() => {
     setCartCount(cart.length)
@@ -40,7 +48,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         cart,
         totalPrice,
         addToCart,
-        cartCount
+        cartCount,
+        isSideCartPanelOpen,
+        changeSideCartPanelOpen
       }}
     >
       {children}
