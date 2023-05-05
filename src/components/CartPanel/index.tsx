@@ -6,8 +6,10 @@ import {
   SidePanelHeader,
   SidePanelWrapper,
 } from "@/src/styles/component/sidePanel";
+
 import { X } from "phosphor-react";
 import { useContext } from "react";
+import { CartItem } from "../CartItem";
 
 export function CartPanel() {
   const { isSideCartPanelOpen } = useContext(CartContext);
@@ -16,7 +18,7 @@ export function CartPanel() {
   function handleSideCartPanelChange() {
     changeSideCartPanelOpen(false);
   }
-  return (
+   return (
     <SidePanelWrapper isSideCartPanelOpen={isSideCartPanelOpen}>
       <CloseButton onClick={handleSideCartPanelChange}>
         <X />
@@ -24,48 +26,21 @@ export function CartPanel() {
       <SidePanelContentWrapper>
         <SidePanelHeader>Sacola de compras</SidePanelHeader>
         <SidePanelContentList>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span> 
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span> 
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span> 
-          <span>Carrinho</span>
-          <span>Carrinho</span>
-          <span>Carrinho</span>
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
+          <CartItem />
         </SidePanelContentList>
       </SidePanelContentWrapper>
     </SidePanelWrapper>

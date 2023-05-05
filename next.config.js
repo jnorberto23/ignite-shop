@@ -6,6 +6,7 @@ const nextConfig = {
   images: {
     domains: [
       'files.stripe.com',
+      "encrypted-tbn0.gstatic.com"
     ],
   },
 }

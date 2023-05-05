@@ -11,6 +11,7 @@ export const SidePanelWrapper = styled("div", {
       },
     },
   },
+  transition: 'all 0.2s ease-in-out',
   display: "flex",
   flexDirection: "column",
   height: "100%",
@@ -28,6 +29,7 @@ export const SidePanelWrapper = styled("div", {
     left: "10%",
     width: "90%",
     overflowX: "hidden",
+    padding: "0",
   },
 });
 
@@ -52,9 +54,13 @@ export const SidePanelContentWrapper = styled("div", {
   alignItems: "flex-start",
   padding: "0 3rem 3rem 3rem",
   justifyContent: "flex-start",
+
+  "@media screen and (max-width: 720px)": {
+    padding: "0 1rem 1rem 1rem",
+  },
 });
 
-export const SidePanelHeader = styled("div", {
+export const SidePanelHeader = styled("h1", {
   fontFamily: "Roboto",
   fontStyle: "normal",
   fontWeight: "700",
@@ -62,16 +68,16 @@ export const SidePanelHeader = styled("div", {
   lineHeight: "160%",
 });
 
-export const SidePanelContentList = styled("div", {
+export const SidePanelContentList = styled("ul", {
+  marginTop: "2rem",
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
   height: "55vh",
-  width: '100%',
+  width: "100%",
   justifyContent: "flex-start",
-  backgroundColor: "red",
-  gap: "1rem",
-  overflowY: 'scroll', /* Add the ability to scroll */
+  gap: "1.5rem",
+  overflowY: "scroll" /* Add the ability to scroll */,
 
   /* Hide scrollbar for Chrome, Safari and Opera */
   "&::-webkit-scrollbar": {
@@ -81,3 +87,4 @@ export const SidePanelContentList = styled("div", {
   "&:-ms-overflow-style": "none",
   scrollbarWidth: "none",
 });
+
