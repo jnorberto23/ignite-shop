@@ -22,6 +22,7 @@ export function CartItem() {
           Remover
         </SidePanelContentItemRemoveButton>
       </SidePanelContentItemTextWrapper>
+    
     </SidePanelContentItem>
   );
 }

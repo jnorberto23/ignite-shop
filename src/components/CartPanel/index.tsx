@@ -1,7 +1,10 @@
 import { CartContext } from "@/src/context/CartContext";
 import {
   CloseButton,
+  SidePanelContentAmountWrapper,
+  SidePanelContentButton,
   SidePanelContentList,
+  SidePanelContentTotalValueWrapper,
   SidePanelContentWrapper,
   SidePanelHeader,
   SidePanelWrapper,
@@ -18,7 +21,7 @@ export function CartPanel() {
   function handleSideCartPanelChange() {
     changeSideCartPanelOpen(false);
   }
-   return (
+  return (
     <SidePanelWrapper isSideCartPanelOpen={isSideCartPanelOpen}>
       <CloseButton onClick={handleSideCartPanelChange}>
         <X />
@@ -42,6 +45,15 @@ export function CartPanel() {
           <CartItem />
           <CartItem />
         </SidePanelContentList>
+        <SidePanelContentAmountWrapper>
+          <span>Quantidade</span>
+          <span>3 itens</span>
+        </SidePanelContentAmountWrapper>
+        <SidePanelContentTotalValueWrapper>
+        <span>Valor total</span>
+          <span>R$ 270,00</span>
+        </SidePanelContentTotalValueWrapper>
+        <SidePanelContentButton>Finalizar compra</SidePanelContentButton>
       </SidePanelContentWrapper>
     </SidePanelWrapper>
   );

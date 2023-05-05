@@ -11,7 +11,7 @@ export const SidePanelWrapper = styled("div", {
       },
     },
   },
-  transition: 'all 0.2s ease-in-out',
+  transition: "all 0.2s ease-in-out",
   display: "flex",
   flexDirection: "column",
   height: "100%",
@@ -88,3 +88,45 @@ export const SidePanelContentList = styled("ul", {
   scrollbarWidth: "none",
 });
 
+export const SidePanelContentAmountWrapper = styled("div", {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  width: "100%",
+  marginTop: "3rem",
+  color: "$gray300",
+});
+
+export const SidePanelContentTotalValueWrapper = styled("div", {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+  width: "100%",
+  marginTop: "0.5rem",
+  fontSize: "$xs",
+  fontWeight: 800,
+
+  ":last-child": {
+    fontSize: "$lg",
+  },
+});
+export const SidePanelContentButton = styled("button", {
+  width: "100%",
+  height: "4rem",
+  marginTop: "2rem",
+  backgroundColor: "$green500",
+  color: "$white",
+  borderRadius: "8px",
+  fontFamily: "Roboto",
+  fontStyle: "normal",
+  fontWeight: "700",
+  fontSize: "$md",
+  lineHeight: "160%",
+  border: "none",
+
+  "&:hover": {
+    backgroundColor: "$green300",
+  },
+});
