@@ -15,9 +15,13 @@ import { useContext } from "react";
 import { CartItem } from "../CartItem";
 
 export function CartPanel() {
-  const { isSideCartPanelOpen, cartCount, totalPrice, cart } =
-    useContext(CartContext);
-  const { changeSideCartPanelOpen } = useContext(CartContext);
+  const {
+    isSideCartPanelOpen,
+    cartCount,
+    totalPrice,
+    cart,
+    changeSideCartPanelOpen,
+  } = useContext(CartContext);
 
   function handleSideCartPanelChange() {
     changeSideCartPanelOpen(false);
@@ -31,7 +35,7 @@ export function CartPanel() {
         <SidePanelHeader>Sacola de compras</SidePanelHeader>
         <SidePanelContentList>
           {cart.map((element) => {
-            return <CartItem item={element} key={element.id}/>;
+            return <CartItem item={element} key={element.id} />;
           })}
         </SidePanelContentList>
         <SidePanelContentAmountWrapper>
