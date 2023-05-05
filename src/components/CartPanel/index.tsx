@@ -1,6 +1,9 @@
 import { CartContext } from "@/src/context/CartContext";
 import {
   CloseButton,
+  SidePanelContentList,
+  SidePanelContentWrapper,
+  SidePanelHeader,
   SidePanelWrapper,
 } from "@/src/styles/component/sidePanel";
 import { X } from "phosphor-react";
@@ -18,7 +21,53 @@ export function CartPanel() {
       <CloseButton onClick={handleSideCartPanelChange}>
         <X />
       </CloseButton>
-      <span>Carrinho</span>
+      <SidePanelContentWrapper>
+        <SidePanelHeader>Sacola de compras</SidePanelHeader>
+        <SidePanelContentList>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span> 
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span> 
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span> 
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+          <span>Carrinho</span>
+        </SidePanelContentList>
+      </SidePanelContentWrapper>
     </SidePanelWrapper>
   );
 }
