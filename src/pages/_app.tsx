@@ -7,6 +7,7 @@ import {
 } from "../styles/pages/app";
 import { CartContextProvider } from "../context/CartContext";
 import { HeaderComponent } from "../components/Header";
+import { CartPanel } from "../components/CartPanel";
 
 globalStyles();
 
@@ -17,6 +18,7 @@ function App({ Component, pageProps }: AppProps) {
       <Container>
         <HeaderComponent />
         <Component {...pageProps} />
+        <CartPanel/>
       </Container>
     </CartContextProvider>
   );
