@@ -7,8 +7,9 @@ interface CartContextProviderProps {
 type ItemType = {
   id: string;
   amount: number;
-  price: string;
-
+  price: number;
+  image: string;
+  name: string;
 };
 
 interface ContextInterface {
@@ -40,6 +41,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
   useEffect(() => {
     setCartCount(cart.length)
+    setTotalPrice(cart.reduce((acc, act) => {
+      return Number(act.price) + acc
+    }, 0))
   }, [cart])
 
   return (

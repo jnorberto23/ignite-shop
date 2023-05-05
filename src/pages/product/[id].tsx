@@ -17,16 +17,19 @@ interface ProductProps {
     id: string;
     name: string;
     imageUrl: string;
-    price: string;
+    price: number;
     description: string;
     defaultPriceId: string;
+    priceFormatted: string;
   };
 }
 
 type ItemType = {
   id: string;
   amount: number;
-  price: string;
+  price: number;
+  image: string;
+  name: string;
 };
 
 export default function Product({ product }: ProductProps) {
@@ -57,6 +60,8 @@ export default function Product({ product }: ProductProps) {
       id: product.defaultPriceId,
       amount: 1,
       price: product.price,
+      image: product.imageUrl,
+      name: product.name
     };
     addToCart(item);
   }
@@ -73,7 +78,7 @@ export default function Product({ product }: ProductProps) {
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{product.priceFormatted}</span>
 
           <p>{product.description}</p>
 
@@ -113,10 +118,11 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
         id: product.id,
         name: product.name,
         imageUrl: product.images[0],
-        price: new Intl.NumberFormat("pt-BR", {
+        priceFormatted: new Intl.NumberFormat("pt-BR", {
           style: "currency",
           currency: "BRL",
         }).format((price.unit_amount || 0) / 100),
+        price: price.unit_amount,
         description: product.description,
         defaultPriceId: price.id,
       },

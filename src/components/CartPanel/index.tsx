@@ -15,7 +15,8 @@ import { useContext } from "react";
 import { CartItem } from "../CartItem";
 
 export function CartPanel() {
-  const { isSideCartPanelOpen } = useContext(CartContext);
+  const { isSideCartPanelOpen, cartCount, totalPrice, cart } =
+    useContext(CartContext);
   const { changeSideCartPanelOpen } = useContext(CartContext);
 
   function handleSideCartPanelChange() {
@@ -29,29 +30,22 @@ export function CartPanel() {
       <SidePanelContentWrapper>
         <SidePanelHeader>Sacola de compras</SidePanelHeader>
         <SidePanelContentList>
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
+          {cart.map((element) => {
+            return <CartItem item={element} key={element.id}/>;
+          })}
         </SidePanelContentList>
         <SidePanelContentAmountWrapper>
           <span>Quantidade</span>
-          <span>3 itens</span>
+          <span>{cartCount} itens</span>
         </SidePanelContentAmountWrapper>
         <SidePanelContentTotalValueWrapper>
-        <span>Valor total</span>
-          <span>R$ 270,00</span>
+          <span>Valor total</span>
+          <span>
+            {new Intl.NumberFormat("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            }).format((totalPrice || 0) / 100)}
+          </span>
         </SidePanelContentTotalValueWrapper>
         <SidePanelContentButton>Finalizar compra</SidePanelContentButton>
       </SidePanelContentWrapper>
