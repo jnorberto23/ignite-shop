@@ -31,7 +31,20 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   const [isSideCartPanelOpen, setIsSideCartPanelOpen] = useState(false);
 
   function addToCart(item: ItemType) {
-    setCart([...cart, item]);
+    const itemAlreadyHasOnCart = cart.some((element) => element.id === item.id)
+    const cartsFiltered = cart.filter((element: ItemType) => {
+      if (element.id === item.id) {
+         element.count + 1
+         return element
+      }
+    });
+
+    if(itemAlreadyHasOnCart){
+      setCart([...cartsFiltered]);
+    }else{
+      setCart([...cartsFiltered, item]);
+    }
+    
   }
 
   function changeSideCartPanelOpen(value: boolean) {
