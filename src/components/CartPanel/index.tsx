@@ -26,6 +26,7 @@ export function CartPanel() {
   function handleSideCartPanelChange() {
     changeSideCartPanelOpen(false);
   }
+
   return (
     <SidePanelWrapper isSideCartPanelOpen={isSideCartPanelOpen}>
       <CloseButton onClick={handleSideCartPanelChange}>

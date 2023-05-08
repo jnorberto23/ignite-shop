@@ -1,3 +1,4 @@
+import { CartContext, CartContextProvider } from "@/src/context/CartContext";
 import {
   SidePanelContentItem,
   SidePanelContentItemPrice,
@@ -6,6 +7,7 @@ import {
   SidePanelContentItemTitle,
 } from "@/src/styles/component/cartItem";
 import Image from "next/image";
+import { useContext } from "react";
 
 type ItemType = {
   id: string;
@@ -18,7 +20,15 @@ interface CartItemProps {
   item: ItemType;
 }
 
+
+
 export function CartItem({ item }: CartItemProps) {
+  const { removeFromCart } = useContext(CartContext);
+
+  function handleRemoveItemFromCart() {
+    removeFromCart(item.id);
+  }
+  
   return (
     <SidePanelContentItem>
       <Image width={80} height={80} src={item.image} alt={item.name} />
@@ -30,7 +40,7 @@ export function CartItem({ item }: CartItemProps) {
             currency: "BRL",
           }).format(item.price / 100)}
         </SidePanelContentItemPrice>
-        <SidePanelContentItemRemoveButton>
+        <SidePanelContentItemRemoveButton onClick={handleRemoveItemFromCart}>
           Remover
         </SidePanelContentItemRemoveButton>
       </SidePanelContentItemTextWrapper>

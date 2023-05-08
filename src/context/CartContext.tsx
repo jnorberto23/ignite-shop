@@ -18,8 +18,8 @@ interface ContextInterface {
   cartCount: number;
   isSideCartPanelOpen: boolean;
   addToCart: (item: ItemType) => void;
-  changeSideCartPanelOpen: (value: boolean) => void
-
+  changeSideCartPanelOpen: (value: boolean) => void;
+  removeFromCart: (id: string) => void;
 }
 
 export const CartContext = createContext({} as ContextInterface);
@@ -38,6 +38,13 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     setIsSideCartPanelOpen(value);
   }
 
+  function removeFromCart(id: string) {
+    const cartsFiltered = cart.filter((element) => {
+      return element.id !== id
+    })
+    setCart(cartsFiltered);
+  }
+
 
   useEffect(() => {
     setCartCount(cart.length)
@@ -54,7 +61,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         addToCart,
         cartCount,
         isSideCartPanelOpen,
-        changeSideCartPanelOpen
+        changeSideCartPanelOpen,
+        removeFromCart
       }}
     >
       {children}
