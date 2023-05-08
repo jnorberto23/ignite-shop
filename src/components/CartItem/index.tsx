@@ -17,15 +17,15 @@ type ItemType = {
   price: number;
   image: string;
   name: string;
-  count: number
+  count: number;
 };
 interface CartItemProps {
   item: ItemType;
 }
 
 export function CartItem({ item }: CartItemProps) {
-  const { updateCartItemCount } = useContext(CartContext);
-  const [counter, setCounter] = useState(0);
+  const { updateCartItemCount, removeFromCart } = useContext(CartContext);
+  const [counter, setCounter] = useState(item.count);
 
   function HandleRemoveCounter() {
     if (counter > 0) {
@@ -39,6 +39,9 @@ export function CartItem({ item }: CartItemProps) {
 
   useEffect(() => {
     updateCartItemCount(item.id, counter);
+    if (counter < 1) {
+      removeFromCart(item.id);
+    }
   }, [counter]);
 
   return (

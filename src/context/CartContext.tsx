@@ -18,6 +18,7 @@ interface ContextInterface {
   cartCount: number;
   isSideCartPanelOpen: boolean;
   addToCart: (item: ItemType) => void;
+  removeFromCart: (id: string) => void;
   changeSideCartPanelOpen: (value: boolean) => void;
   updateCartItemCount: (id: string, count: number) => void;
 }
@@ -30,23 +31,37 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cartCount, setCartCount] = useState(0);
   const [isSideCartPanelOpen, setIsSideCartPanelOpen] = useState(false);
 
-  function addToCart(item: ItemType) {
-    const itemAlreadyHasOnCart = cart.some((element) => element.id === item.id)
+  async function addToCart(item: ItemType) {
+    const itemAlreadyHasOnCart = await cart.some(
+      (element) => element.id === item.id
+    );
+
     const cartsFiltered = cart.filter((element: ItemType) => {
+      console.log("caiu");
       if (element.id === item.id) {
-         element.count + 1
-         return element
+        console.log("caiu no if");
+        element.count = element.count + 1;
+        return element;
+      }
+      return element;
+    });
+
+    if (itemAlreadyHasOnCart) {
+      setCart([...cartsFiltered]);
+    } else {
+      setCart([...cart, item]);
+    }
+  }
+
+  async function removeFromCart(id: string) {
+    const cartsFiltered = cart.filter((element: ItemType) => {
+      if (element.id !== id) {
+        return element;
       }
     });
 
-    if(itemAlreadyHasOnCart){
-      setCart([...cartsFiltered]);
-    }else{
-      setCart([...cartsFiltered, item]);
-    }
-    
+    setCart([...cartsFiltered]);
   }
-
   function changeSideCartPanelOpen(value: boolean) {
     setIsSideCartPanelOpen(value);
   }
@@ -55,9 +70,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     const cartsFiltered = cart.filter((element: ItemType) => {
       if (element.id === id) {
         element.count = count;
-        return element
+        return element;
       }
-      return element
+      return element;
     });
     setCart([...cartsFiltered]);
   }
@@ -81,6 +96,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         isSideCartPanelOpen,
         changeSideCartPanelOpen,
         updateCartItemCount,
+        removeFromCart
       }}
     >
       {children}
