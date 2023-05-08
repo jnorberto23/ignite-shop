@@ -11,8 +11,9 @@ import {
 } from "@/src/styles/component/sidePanel";
 
 import { X } from "phosphor-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartItem } from "../CartItem";
+import axios from "axios";
 
 export function CartPanel() {
   const {
@@ -25,6 +26,25 @@ export function CartPanel() {
 
   function handleSideCartPanelChange() {
     changeSideCartPanelOpen(false);
+  }
+
+  async function handleBuyButton() {
+    try {
+  
+
+      const cartToCheckout = cart.map((element) => {
+        return { price: element.id, quantity: element.count };
+      });
+
+      const response = await axios.post("/api/checkout", {cartToCheckout});
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+    } catch (err) {
+
+      alert("Falha ao redirecionar ao checkout!");
+    }
   }
 
   return (
@@ -52,7 +72,10 @@ export function CartPanel() {
             }).format((totalPrice || 0) / 100)}
           </span>
         </SidePanelContentTotalValueWrapper>
-        <SidePanelContentButton>Finalizar compra</SidePanelContentButton>
+
+        <SidePanelContentButton onClick={handleBuyButton}>
+          Finalizar compra
+        </SidePanelContentButton>
       </SidePanelContentWrapper>
     </SidePanelWrapper>
   );

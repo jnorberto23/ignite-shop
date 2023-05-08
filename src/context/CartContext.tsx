@@ -37,9 +37,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     );
 
     const cartsFiltered = cart.filter((element: ItemType) => {
-      console.log("caiu");
       if (element.id === item.id) {
-        console.log("caiu no if");
         element.count = element.count + 1;
         return element;
       }

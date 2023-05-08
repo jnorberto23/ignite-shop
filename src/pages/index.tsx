@@ -11,8 +11,6 @@ import "keen-slider/keen-slider.min.css";
 import Stripe from "stripe";
 import { Fragment } from "react";
 import Head from "next/head";
-import { CartPanel } from "../components/CartPanel";
-
 
 interface HomeProps {
   products: {

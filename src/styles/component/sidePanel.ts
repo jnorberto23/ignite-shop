@@ -112,7 +112,10 @@ export const SidePanelContentTotalValueWrapper = styled("div", {
     fontSize: "$lg",
   },
 });
-export const SidePanelContentButton = styled("button", {
+export const SidePanelContentButton = styled("div", {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   width: "100%",
   height: "4rem",
   marginTop: "2rem",
@@ -125,7 +128,7 @@ export const SidePanelContentButton = styled("button", {
   fontSize: "$md",
   lineHeight: "160%",
   border: "none",
-
+  textDecoration: "none",
   "&:hover": {
     backgroundColor: "$green300",
   },
