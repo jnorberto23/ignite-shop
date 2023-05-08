@@ -63,7 +63,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const products = response.data.map((product) => {
     const price = product.default_price as Stripe.Price;
-    console.log('product', product)
     return {
       id: product.id,
       name: product.name,

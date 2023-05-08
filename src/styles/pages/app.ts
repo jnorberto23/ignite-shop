@@ -1,4 +1,3 @@
-import { FileX, ShoppingCart } from "phosphor-react";
 import { styled } from "..";
 
 export const Container = styled("div", {

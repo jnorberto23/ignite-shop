@@ -6,10 +6,10 @@ interface CartContextProviderProps {
 
 type ItemType = {
   id: string;
-  amount: number;
   price: number;
   image: string;
   name: string;
+  count: number;
 };
 
 interface ContextInterface {
@@ -19,7 +19,7 @@ interface ContextInterface {
   isSideCartPanelOpen: boolean;
   addToCart: (item: ItemType) => void;
   changeSideCartPanelOpen: (value: boolean) => void;
-  removeFromCart: (id: string) => void;
+  updateCartItemCount: (id: string, count: number) => void;
 }
 
 export const CartContext = createContext({} as ContextInterface);
@@ -38,20 +38,25 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     setIsSideCartPanelOpen(value);
   }
 
-  function removeFromCart(id: string) {
-    const cartsFiltered = cart.filter((element) => {
-      return element.id !== id
-    })
-    setCart(cartsFiltered);
+  function updateCartItemCount(id: string, count: number) {
+    const cartsFiltered = cart.filter((element: ItemType) => {
+      if (element.id === id) {
+        element.count = count;
+        return element
+      }
+      return element
+    });
+    setCart([...cartsFiltered]);
   }
 
-
   useEffect(() => {
-    setCartCount(cart.length)
-    setTotalPrice(cart.reduce((acc, act) => {
-      return Number(act.price) + acc
-    }, 0))
-  }, [cart])
+    setCartCount(cart.length);
+    setTotalPrice(
+      cart.reduce((acc, act) => {
+        return (Number(act.price) + acc) * act.count;
+      }, 0)
+    );
+  }, [cart]);
 
   return (
     <CartContext.Provider
@@ -62,7 +67,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         cartCount,
         isSideCartPanelOpen,
         changeSideCartPanelOpen,
-        removeFromCart
+        updateCartItemCount,
       }}
     >
       {children}

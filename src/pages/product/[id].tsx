@@ -30,6 +30,7 @@ type ItemType = {
   price: number;
   image: string;
   name: string;
+  count: number
 };
 
 export default function Product({ product }: ProductProps) {
@@ -61,7 +62,8 @@ export default function Product({ product }: ProductProps) {
       amount: 1,
       price: product.price,
       image: product.imageUrl,
-      name: product.name
+      name: product.name,
+      count: 1,
     };
     addToCart(item);
   }

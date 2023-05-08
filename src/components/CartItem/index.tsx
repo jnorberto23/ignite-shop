@@ -1,34 +1,46 @@
-import { CartContext, CartContextProvider } from "@/src/context/CartContext";
+import { CartContext } from "@/src/context/CartContext";
 import {
   SidePanelContentItem,
+  SidePanelContentItemCounterButton,
+  SidePanelContentItemCounterSpan,
+  SidePanelContentItemCounterWrapper,
   SidePanelContentItemPrice,
-  SidePanelContentItemRemoveButton,
   SidePanelContentItemTextWrapper,
   SidePanelContentItemTitle,
 } from "@/src/styles/component/cartItem";
 import Image from "next/image";
-import { useContext } from "react";
+import { Minus, Plus } from "phosphor-react";
+import { useContext, useEffect, useState } from "react";
 
 type ItemType = {
   id: string;
-  amount: number;
   price: number;
   image: string;
   name: string;
+  count: number
 };
 interface CartItemProps {
   item: ItemType;
 }
 
-
-
 export function CartItem({ item }: CartItemProps) {
-  const { removeFromCart } = useContext(CartContext);
+  const { updateCartItemCount } = useContext(CartContext);
+  const [counter, setCounter] = useState(0);
 
-  function handleRemoveItemFromCart() {
-    removeFromCart(item.id);
+  function HandleRemoveCounter() {
+    if (counter > 0) {
+      setCounter(counter - 1);
+    }
   }
-  
+
+  function HandleAddCounter() {
+    setCounter(counter + 1);
+  }
+
+  useEffect(() => {
+    updateCartItemCount(item.id, counter);
+  }, [counter]);
+
   return (
     <SidePanelContentItem>
       <Image width={80} height={80} src={item.image} alt={item.name} />
@@ -40,9 +52,17 @@ export function CartItem({ item }: CartItemProps) {
             currency: "BRL",
           }).format(item.price / 100)}
         </SidePanelContentItemPrice>
-        <SidePanelContentItemRemoveButton onClick={handleRemoveItemFromCart}>
-          Remover
-        </SidePanelContentItemRemoveButton>
+        <SidePanelContentItemCounterWrapper>
+          <SidePanelContentItemCounterButton onClick={HandleRemoveCounter}>
+            <Minus />
+          </SidePanelContentItemCounterButton>
+          <SidePanelContentItemCounterSpan>
+            {counter}
+          </SidePanelContentItemCounterSpan>
+          <SidePanelContentItemCounterButton onClick={HandleAddCounter}>
+            <Plus />
+          </SidePanelContentItemCounterButton>
+        </SidePanelContentItemCounterWrapper>
       </SidePanelContentItemTextWrapper>
     </SidePanelContentItem>
   );
