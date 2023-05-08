@@ -60,7 +60,7 @@ export function CartItem({ item }: CartItemProps) {
             <Minus />
           </SidePanelContentItemCounterButton>
           <SidePanelContentItemCounterSpan>
-            {counter}
+            {item.count}
           </SidePanelContentItemCounterSpan>
           <SidePanelContentItemCounterButton onClick={HandleAddCounter}>
             <Plus />
