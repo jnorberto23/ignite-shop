@@ -30,8 +30,6 @@ export function CartPanel() {
 
   async function handleBuyButton() {
     try {
-  
-
       const cartToCheckout = cart.map((element) => {
         return { price: element.id, quantity: element.count };
       });
