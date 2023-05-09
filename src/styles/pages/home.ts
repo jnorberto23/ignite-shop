@@ -29,7 +29,7 @@ export const Product = styled('div', {
     left: '0.25rem',
     right: '0.25rem',
     padding: '2rem',
-
+    
     borderRadius: 6,
 
     display: 'flex',
@@ -42,6 +42,11 @@ export const Product = styled('div', {
     opacity: 0,
     transition: 'all 0.2s ease-in-out',
 
+    div: {
+      display: 'flex',
+      flexDirection: "column",
+      gap: '1rem',
+    },
     strong: {
       fontSize: '$lg',
       color: '$gray100',
@@ -61,3 +66,18 @@ export const Product = styled('div', {
     }
   }
 })
+
+export const AddToCartIconButton = styled("button", {
+  border: "none",
+  borderRadius: "5px",
+  background: "$green300",
+  padding: "0.8rem",
+  cursor: "pointer",
+  svg: {
+    color: "$white",
+    fontSize: "$xl"
+  },
+  "&:hover": {
+    background: "$green500",
+  }
+});

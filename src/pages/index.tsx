@@ -5,12 +5,18 @@ import Link from "next/link";
 import { useKeenSlider } from "keen-slider/react";
 
 import { stripe } from "../lib/stripe";
-import { HomeContainer, Product } from "../styles/pages/home";
+import {
+  AddToCartIconButton,
+  HomeContainer,
+  Product,
+} from "../styles/pages/home";
 
 import "keen-slider/keen-slider.min.css";
 import Stripe from "stripe";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import Head from "next/head";
+import { Handbag } from "phosphor-react";
+import { CartContext } from "../context/CartContext";
 
 interface HomeProps {
   products: {
@@ -18,6 +24,7 @@ interface HomeProps {
     name: string;
     imageUrl: string;
     price: string;
+    priceId: string
   }[];
 }
 
@@ -27,7 +34,11 @@ export default function Home({ products }: HomeProps) {
       perView: 1.25,
       spacing: 15,
     },
-  })
+  });
+
+  const { addToCart } = useContext(CartContext);
+
+
   return (
     <Fragment>
       <Head>
@@ -35,21 +46,35 @@ export default function Home({ products }: HomeProps) {
       </Head>
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map((product) => {
+            const item = {
+              id: product.priceId,
+              amount: 1,
+              price: product.price,
+              image: product.imageUrl,
+              name: product.name,
+              count: 1,
+            };
+          
           return (
             <Link href={`/product/${product.id}`} key={product.id}>
               <Product className="keen-slider__slide">
                 <Image src={product.imageUrl} width={520} height={480} alt="" />
 
                 <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <div>
+                    <strong>{product.name}</strong>
+                    <span>{product.price}</span>
+                  </div>
+
+                  <AddToCartIconButton onClick={ () => addToCart(item)}>
+                    <Handbag weight="bold" />
+                  </AddToCartIconButton>
                 </footer>
               </Product>
             </Link>
           );
         })}
       </HomeContainer>
-
     </Fragment>
   );
 }
@@ -69,6 +94,7 @@ export const getStaticProps: GetStaticProps = async () => {
         style: "currency",
         currency: "BRL",
       }).format((price.unit_amount || 0) / 100),
+      priceId: price.id
     };
   });
 

@@ -31,6 +31,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cartCount, setCartCount] = useState(0);
   const [isSideCartPanelOpen, setIsSideCartPanelOpen] = useState(false);
 
+
   async function addToCart(item: ItemType) {
     const itemAlreadyHasOnCart = await cart.some(
       (element) => element.id === item.id
@@ -60,9 +61,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
     setCart([...cartsFiltered]);
   }
-  function changeSideCartPanelOpen(value: boolean) {
-    setIsSideCartPanelOpen(value);
-  }
+
 
   function updateCartItemCount(id: string, count: number) {
     const cartsFiltered = cart.filter((element: ItemType) => {
@@ -73,6 +72,11 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       return element;
     });
     setCart([...cartsFiltered]);
+  }
+
+
+  function changeSideCartPanelOpen(value: boolean) {
+    setIsSideCartPanelOpen(value);
   }
 
   useEffect(() => {

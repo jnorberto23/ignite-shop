@@ -34,8 +34,6 @@ type ItemType = {
 };
 
 export default function Product({ product }: ProductProps) {
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] =
-    useState(false);
   const { addToCart } = useContext(CartContext);
 
   // async function handleBuyButton() {
@@ -85,7 +83,6 @@ export default function Product({ product }: ProductProps) {
           <p>{product.description}</p>
 
           <button
-            disabled={isCreatingCheckoutSession}
             onClick={handleAddToCart}
           >
             Colocar na sacola
